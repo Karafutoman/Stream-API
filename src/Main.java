@@ -31,6 +31,7 @@ public class Main {
 
         //Поиск призывников
         List<String> conscripts = persons.stream()
+                .filter(person -> person.getSex().equals(Sex.MAN))    
                 .filter(person -> person.getAge() > AGE_OF_MAJORITY)
                 .filter(person -> person.getAge() < AGE_OF_CONSCRIPTS)
                 .map(Person::getSurname)
