@@ -32,8 +32,8 @@ public class Main {
         //Поиск призывников
         List<String> conscripts = persons.stream()
                 .filter(person -> person.getSex().equals(Sex.MAN))    
-                .filter(person -> person.getAge() > AGE_OF_MAJORITY)
-                .filter(person -> person.getAge() < AGE_OF_CONSCRIPTS)
+                .filter(person -> person.getAge() >= AGE_OF_MAJORITY)
+                .filter(person -> person.getAge() <= AGE_OF_CONSCRIPTS)
                 .map(Person::getSurname)
                 .toList();
 
@@ -44,9 +44,9 @@ public class Main {
         //Поиск работающих
         List<String> workables = persons.stream()
                 .filter(person -> person.getEducation().equals(Education.HIGHER))
-                .filter(person -> person.getAge() > 18)
-                .filter(person -> person.getSex().equals(Sex.MAN) & person.getAge() < AGE_OF_ABLE_BODIED_MEN ||
-                        person.getSex().equals(Sex.WOMAN) & person.getAge() < AGE_OF_ABLE_BODIED_WOMEN)
+                .filter(person -> person.getAge() >= AGE_OF_MAJORITY)
+                .filter(person -> person.getSex().equals(Sex.MAN) & person.getAge() <= AGE_OF_ABLE_BODIED_MEN ||
+                        person.getSex().equals(Sex.WOMAN) & person.getAge() <= AGE_OF_ABLE_BODIED_WOMEN)
                 .map(Person::getSurname)
                 .sorted()
                 .toList();
